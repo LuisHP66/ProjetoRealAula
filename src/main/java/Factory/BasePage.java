@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+
 import static Factory.DriveFactory.getDriver;
 
 public class BasePage {
@@ -29,16 +30,12 @@ public class BasePage {
     public boolean radioMarcadoVerifica(String id_campo){
         return getDriver().findElement(By.id(id_campo)).isSelected();
     }
-    public void selecaoCombo(String id_campo, String texto){
-        WebElement element = getDriver().findElement(By.id(id_campo));
-        Select combo = new Select(element);
-        combo.selectByVisibleText(texto);
+    public void setCombo(By by, By bySelect){
+        getDriver().findElement(by).click();
+        getDriver().findElement(bySelect).click();
     }
-    public void selecaoComboXpath(String xpath){
-        getDriver().findElement(By.xpath(xpath)).click();
-    }
-    public String obterValorCombo(String id_campo){
-        WebElement element = getDriver().findElement(By.id(id_campo));
+    public String obterValorCombo(By by){
+        WebElement element = getDriver().findElement(by);
         Select combo = new Select(element);
         return combo.getFirstSelectedOption().getText();
     }
